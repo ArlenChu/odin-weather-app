@@ -1,13 +1,11 @@
-import path from "node:path";
- import { fileURLToPath } from 'node:url';
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import { resolve } from "node:dns";
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-export default {
+module.exports = {
   entry: "./src/index.ts",
   output: {
     filename: "main.js",
-    path: path.resolve(import.meta.dirname, "dist"),
+    path: path.resolve(__dirname, "dist"),
     clean: true,
   },
   devServer: {
@@ -34,7 +32,11 @@ export default {
       },
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        loader: 'esbuild-loader',
+        options: {
+          loader: 'ts',
+          target: 'esnext'
+        },
         exclude: /node_modules/,
       },
     ],
