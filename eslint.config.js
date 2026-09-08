@@ -1,6 +1,7 @@
 const js = require("@eslint/js");
 const eslintConfigPrettier = require("eslint-config-prettier");
 const globals = require("globals");
+const tseslint = require("typescript-eslint")
 
 module.exports = [
     {
@@ -15,9 +16,11 @@ module.exports = [
     },
     js.configs.recommended,
     eslintConfigPrettier,
+    ...tseslint.configs.recommended,
     {
         rules: {
-            "no-unsed-vars": "warn",
+            "no-unused-vars": "off",
+            "@typescript-eslint/no-unused-vars": "warn",
         },
     },
 ];
